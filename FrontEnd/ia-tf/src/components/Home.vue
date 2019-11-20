@@ -16,36 +16,91 @@
 
     <v-stepper-items>
       <v-stepper-content step="1">
-        <v-card
-          class="mb-5"
-          color="grey lighten-1"
-          height="200px"
-        ></v-card>
+      <v-dialog
+          v-model="terminosDialog"
+         max-width="600px"
+          >
+          <v-card>
+            <v-card-title class="headline">Terminos y Condiciones de uso</v-card-title>
 
-        <v-btn
-          color="primary"
-          @click="e1 = 2"
+            <v-card-text>
+              Let Google help apps determine location. This means sending anonymous location data to Google, even when no apps are running.
+            </v-card-text>
+
+            <v-card-actions>
+              <v-spacer></v-spacer>
+
+              <v-btn
+                color="green darken-1"
+                text
+                @click="terminosDialog = false"
+              >
+                Disagree
+              </v-btn>
+
+              <v-btn
+                color="green darken-1"
+                text
+                @click="terminosDialog = false"
+              >
+                Agree
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+         </v-dialog>
+      <v-card 
+      class="mx-auto my-5 px-5 py-5 "
         >
-          Continue
-        </v-btn>
+        <form>
+          <v-text-field
+            v-model="name"
+            prepend-icon="fab fa-twitter-square"
+            hint="Usuario de Twitter"
+            label="Username"
+            data-vv-name="name"
+            required
+            
+          ></v-text-field>
+         <v-checkbox v-model="checkbox">
+            <template v-slot:label>
+              <div>
+                Acepto los 
+                <a
+                      href="#"
+                      
+                      @click.stop="terminosDialog = true"
+                      
+                    >
+                      Terminos y Condiciones
+                    </a>
+              </div>
+            </template>
+            </v-checkbox>
 
-        <v-btn >Cancel</v-btn>
+          <v-btn text color="primary" @click="e1=2">Continuar</v-btn>
+          
+        </form>
+
+      </v-card>
+        
       </v-stepper-content>
 
-      <v-stepper-content step="2">
-        <v-card
+      <v-stepper-content  step="2">
+      
+        <v-card 
       class="mx-auto my-5 px-5 py-5 "
-      
-      
-      
         >
-            <GChart
+       
+            <GChart v-if="e1==2"
         :settings="{packages: ['bar']}"    
         :data="chartData"
         :options="chartOptions"
         :createChart="(el, google) => new google.charts.Bar(el)"
         @ready="onChartReady"
-      />
+       
+         />
+        
+     
        </v-card>
         
       </v-stepper-content>
@@ -110,8 +165,12 @@ export default {
     },
   data() {
     return {
+    
        card_text: 'Lorem ipsum dolor sit amet, brute iriure accusata ne mea. Eos suavitate referrentur ad, te duo agam libris qualisque, utroque quaestio accommodare no qui. Et percipit laboramus usu, no invidunt verterem nominati mel. Dolorem ancillae an mei, ut putant invenire splendide mel, ea nec propriae adipisci. Ignota salutandi accusamus in sed, et per malis fuisset, qui id ludus appareat.',
-     e1:1,
+     e1:0,
+     name:"",
+     terminosDialog:false,
+     checkbox:0,
     chartsLib: null, 
       // Array will be automatically processed with visualization.arrayToDataTable function
       chartData: [
@@ -125,7 +184,8 @@ export default {
   },
    computed: {
      chartOptions () {
-      if (!this.chartsLib) return null
+      if (!this.chartsLib) {return null}
+      
       return this.chartsLib.charts.Bar.convertOptions({
         chart: {
           title: 'Company Performance',
@@ -133,6 +193,7 @@ export default {
         },
         bars: 'vertical', // Required for Material Bar Charts.
         hAxis: { format: 'decimal' },
+        
         height: 400,
         colors: ['#1b9e77', '#d95f02', '#7570b3']
       })
@@ -140,7 +201,14 @@ export default {
   },
   methods: {
      onChartReady (chart, google) {
+      
       this.chartsLib = google
+      
+    },
+    openTerminosCondiciones(){
+      alert("hello")
+      
+      
     }
   }
 };
