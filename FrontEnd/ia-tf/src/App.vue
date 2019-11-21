@@ -4,29 +4,10 @@
       app
       color="primary"
       dark
+      src="https://decidesoluciones.es/wp-content/uploads/2019/04/Inteligencia-Artificial-en-positivo-soluciones-en-positivo-cambiar-mundo-IA-innovacion-1200x545_c-1090x545.jpg"
     >
-     
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
-     
-         
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
-     
+      
+      <div class="hidden-sm-and-down font-weight-light headline" >Depredetector</div>
       
 
       
